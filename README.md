@@ -40,11 +40,3 @@ To run this project locally, follow these steps:
 
 This frontend application interacts with a backend API for managing mentors and students. The API base URL is configured using environment variables. Ensure that you have the correct API URL set up in your environment configuration.
 
-## Contributing
-
-Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request.
-
-
----
-
-Feel free to customize this README according to your project's specific details and requirements.
