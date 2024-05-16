@@ -1,0 +1,1 @@
+export const REACT_APP_API_URL="https://mentor-student-backend-mgt3.onrender.com";
