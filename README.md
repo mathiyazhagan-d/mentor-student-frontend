@@ -1,6 +1,3 @@
-Sure, here's a basic README file content for your frontend application deployed at https://mentor-students-task.netlify.app/:
-
----
 
 # Mentor-Students Task
 
@@ -40,3 +37,4 @@ To run this project locally, follow these steps:
 
 This frontend application interacts with a backend API for managing mentors and students. The API base URL is configured using environment variables. Ensure that you have the correct API URL set up in your environment configuration.
 
+Check out the backend code: [Mentor-Students code backend](https://github.com/mathiyazhagan-d/mentor-student-backend)
