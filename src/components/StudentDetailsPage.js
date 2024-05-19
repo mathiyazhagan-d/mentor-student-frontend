@@ -59,16 +59,14 @@ function StudentDetailsPage() {
     event.preventDefault();
     try {
       await updateStudent(id, { name: student.name, email: student.email, mentor: newMentor });
-      const updatedStudent = { ...student, mentor: newMentor }; // Update mentor in local state
-      setStudent(updatedStudent); // Update local state with the updated mentor
+      const updatedStudent = { ...student, mentor: newMentor }; 
+      setStudent(updatedStudent); 
       navigate(`/students/${id}`);
     } catch (error) {
       console.error('Error updating student mentor:', error);
       setError('Failed to update mentor.');
     }
   };
-  
-  
 
   if (loading) {
     return (
@@ -119,14 +117,24 @@ function StudentDetailsPage() {
               ))}
             </Select>
           </FormControl>
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            style={{ marginTop: '10px' }}
-          >
-            Submit
-          </Button>
+          <Box display="flex" justifyContent="space-between">
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              style={{ marginTop: '10px' }}
+            >
+              Submit
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ marginTop: '10px' }}
+              onClick={() => navigate('/students')}
+            >
+              Close
+            </Button>
+          </Box>
         </form>
       </Paper>
     </Container>

@@ -5,14 +5,12 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { createMentor, checkExistingEmail } from '../services/mentorService'; // Import the function to check existing email
 
-// Define validation schema using Yup
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'), 
   email: Yup.string()
     .email('Invalid email')
     .required('Email is required')
     .test('existing-email', 'Email already exists', async function(value) {
-      // Check if the email already exists
       if (value) {
         const existingEmail = await checkExistingEmail(value);
         return !existingEmail;
@@ -27,7 +25,6 @@ function MentorForm() {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       await createMentor(values);
-      // Navigate to mentor list page after successful creation
       navigate('/mentors');
     } catch (error) {
       console.error('Error creating mentor:', error);
@@ -71,15 +68,23 @@ function MentorForm() {
                   helperText={<ErrorMessage name="email" />}
                 />
               </div>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
-                style={{ marginTop: '20px' }}
-              >
-                Submit
-              </Button>
+              <Box display="flex" justifyContent="space-between" mt={2}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                >
+                  Submit
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => navigate('/mentors')}
+                >
+                  Close
+                </Button>
+              </Box>
             </Form>
           )}
         </Formik>

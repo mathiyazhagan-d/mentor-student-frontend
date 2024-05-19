@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getMentorDetails } from '../services/mentorService';
 import { getAllStudentsbyMentor } from '../services/studentService';
 import {
@@ -13,12 +13,15 @@ import {
   CardContent,
   CardHeader,
   Grid,
+  IconButton,
 } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function MentorDetailsPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [mentor, setMentor] = useState(null);
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -50,6 +53,9 @@ function MentorDetailsPage() {
           {mentor ? (
             <Paper elevation={3} style={{ padding: '20px', background: '#f5f5f5' }}>
               <Box display="flex" alignItems="center" mb={3}>
+                <IconButton onClick={() => navigate('/mentors')} style={{ marginRight: '10px' }}>
+                  <ArrowBackIcon />
+                </IconButton>
                 <Avatar style={{ background: '#3f51b5' }}>
                   <AccountCircleIcon />
                 </Avatar>

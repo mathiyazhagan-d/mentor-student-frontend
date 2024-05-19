@@ -11,6 +11,7 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  Box,
 } from '@mui/material';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -43,12 +44,12 @@ function StudentForm() {
       .test('existing-email', 'Email already exists', function (value) {
         return !existingEmails.includes(value);
       }),
-    mentor: Yup.string().required('Mentor is required'), // Add validation for mentor selection
+    mentor: Yup.string().required('Mentor is required'),
   });
 
   const handleSubmit = async (values) => {
     try {
-      await createStudent({ name: values.name, email: values.email, mentor: values.mentor }); // Send mentor ID along with other values
+      await createStudent({ name: values.name, email: values.email, mentor: values.mentor });
       navigate('/students');
     } catch (error) {
       console.error('Error creating student:', error);
@@ -100,16 +101,16 @@ function StudentForm() {
                   <MenuItem value="">
                     <em>Select Mentor</em>
                   </MenuItem>
-                  {mentors.map((mentor) => ( 
+                  {mentors.map((mentor) => (
                     <MenuItem key={mentor._id} value={mentor._id}>
                       {mentor.name}
                     </MenuItem>
                   ))}
                 </Field>
               </FormControl>
-              <ErrorMessage name="mentor" component="div" style={{ color: 'red' }} /> {/* Display error message for mentor selection */}
+              <ErrorMessage name="mentor" component="div" style={{ color: 'red' }} />
             </div>
-            <div style={{ textAlign: 'center' }}>
+            <Box display="flex" justifyContent="space-between">
               <Button
                 variant="contained"
                 color="primary"
@@ -118,7 +119,14 @@ function StudentForm() {
               >
                 Submit
               </Button>
-            </div>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => navigate('/students')}
+              >
+                Close
+              </Button>
+            </Box>
           </Form>
         )}
       </Formik>

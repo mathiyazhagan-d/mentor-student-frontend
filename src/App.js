@@ -14,7 +14,12 @@ function App() {
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}> 
         <AppBar position="static" sx={{ backgroundColor: '#3f51b5' }}>
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontFamily: 'Poppins' }}>
+            <Typography 
+              variant="h6" 
+              component={Link} 
+              to="/mentors" 
+              sx={{ flexGrow: 1, fontFamily: 'Poppins', textDecoration: 'none', color: 'inherit' }}
+            >
               Mentor-Student
             </Typography>
             <Button color="inherit" component={Link} to="/mentors">Mentors</Button>
@@ -32,12 +37,11 @@ function App() {
             <Route path="/" element={<StudentListPage />} />
           </Routes>
         </main>
-        <footer style={{ backgroundColor: '#f5f5f5', padding: '20px', marginTop: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}> {/* Center content */}
-  <Typography variant="body2" color="textSecondary">
-    &copy; 2024 Mathiyazhagan. All rights reserved.
-  </Typography>
-</footer>
-
+        <footer style={{ backgroundColor: '#f5f5f5', padding: '20px', marginTop: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Typography variant="body2" color="textSecondary">
+            &copy; 2024 Mathiyazhagan. All rights reserved.
+          </Typography>
+        </footer>
       </div>
     </Router>
   );
