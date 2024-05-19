@@ -13,6 +13,7 @@ import {
   FormControl,
   InputLabel,
   Select,
+  Backdrop,
 } from '@mui/material';
 
 function StudentDetailsPage() {
@@ -21,6 +22,7 @@ function StudentDetailsPage() {
   const [student, setStudent] = useState(null);
   const [newMentor, setNewMentor] = useState('');
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [mentors, setMentors] = useState([]);
 
@@ -57,6 +59,7 @@ function StudentDetailsPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setSubmitting(true);
     try {
       await updateStudent(id, { name: student.name, email: student.email, mentor: newMentor });
       const updatedStudent = { ...student, mentor: newMentor }; 
@@ -65,16 +68,16 @@ function StudentDetailsPage() {
     } catch (error) {
       console.error('Error updating student mentor:', error);
       setError('Failed to update mentor.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
   if (loading) {
     return (
-      <Container maxWidth="md" style={{ marginTop: '20px' }}>
-        <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-          <CircularProgress />
-        </Box>
-      </Container>
+      <Backdrop open={loading} style={{ zIndex: 1300, color: '#fff' }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     );
   }
 
@@ -117,25 +120,32 @@ function StudentDetailsPage() {
               ))}
             </Select>
           </FormControl>
-          <Box display="flex" justifyContent="space-between">
+          <Box display="flex" justifyContent="space-between" alignItems="center">
             <Button
               variant="contained"
               color="primary"
               type="submit"
               style={{ marginTop: '10px' }}
+              disabled={submitting}
             >
-              Submit
+              {submitting ? <CircularProgress size={24} color="inherit" /> : 'Submit'}
             </Button>
             <Button
               variant="contained"
               color="secondary"
               style={{ marginTop: '10px' }}
               onClick={() => navigate('/students')}
+              disabled={submitting}
             >
               Close
             </Button>
           </Box>
         </form>
+        {submitting && (
+          <Backdrop open={submitting} style={{ zIndex: 1300, color: '#fff' }}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )}
       </Paper>
     </Container>
   );
